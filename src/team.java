@@ -4,6 +4,13 @@ public class team {
  private int noOfMatchesWon;
  private int totalNoOfMatches;
  private int noOfGoals;
+ 
+ 
+public team(String teamName) {
+	//super();
+	this.teamName = teamName;
+}
+
 public String getTeamName() {
 	return teamName;
 }
