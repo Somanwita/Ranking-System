@@ -4,8 +4,25 @@ public class team {
  private int noOfMatchesWon;
  private int totalNoOfMatches;
  private int noOfGoals;
+ private boolean homeGround;
+ private int marginOfVictory;
  
- 
+public boolean isHomeGround() {
+	return homeGround;
+}
+
+public void setHomeGround(boolean homeGround) {
+	this.homeGround = homeGround;
+}
+
+public int getMarginOfVictory() {
+	return marginOfVictory;
+}
+
+public void setMarginOfVictory(int marginOfVictory) {
+	this.marginOfVictory = marginOfVictory;
+}
+
 public team(String teamName) {
 	//super();
 	this.teamName = teamName;
