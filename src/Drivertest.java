@@ -42,7 +42,7 @@ public class Drivertest {
         System.out.println("Veertices:" + graph.V());
         System.out.println("Edges" + graph.E());
                
-        PageRank pgobj = new PageRank();
+        PageRankprev pgobj = new PageRankprev();
         
         pgobj.calc(graph);
     }
