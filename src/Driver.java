@@ -1,25 +1,46 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+
 
 public class Driver {
 
     public static void main(String[] args) {
+    	Digraph<team> graph = new Digraph<>();
     	
-        /**
-         * Main program (for testing).
-         */
-        // Create a Graph with Integer nodes
-        Digraph<team> graph = new Digraph<team>();
-        team U = new team("USA");
-        team A = new team("Australia");
-        team B = new team("Bangladesh");
-        team S = new team("Srilanka");
-        team E = new team("England");
-        team SA = new team("South Africa");
-
-        graph.add(B, S); graph.add(A, B); graph.add(B, E); graph.add(SA, B);
-        graph.add(E, SA); graph.add(S, E); graph.add(A, U); graph.add(B, U); 
-        graph.add(S, U); graph.add(E, U); graph.add(SA, U);
-        graph.add(S, A); graph.add(A, E); graph.add(SA, S); graph.add(SA, A);     
+    	FileHandler filehandler = new FileHandler();
+    	List<RankingClass> inputData= new ArrayList<>();
+    	
+    	inputData = filehandler.readTextFile();
+    	for (RankingClass data : inputData) {
+    		if (data.getFtr().equals("H"))	{
+    			graph.add(data.getHomeTeam(), data.getAwayTeam());
+    		}
+    		else if (data.getFtr().equals("A"))	{
+    			graph.add(data.getAwayTeam(), data.getHomeTeam());
+    		}
+    		else if (data.getFtr().equals("D"))	{
+    			graph.add(data.getHomeTeam(), data.getAwayTeam());
+    			graph.add(data.getAwayTeam(), data.getHomeTeam());
+    		}
+    	}
+    	
+//        /**
+//         * Main program (for testing).
+//         */
+//        // Create a Graph with Integer nodes
+//     
+//        team U = new team("USA");
+//        team A = new team("Australia");
+//        team B = new team("Bangladesh");
+//        team S = new team("Srilanka");
+//        team E = new team("England");
+//        team SA = new team("South Africa");
+//
+//        graph.add(B, S); graph.add(A, B); graph.add(B, E); graph.add(SA, B);
+//        graph.add(E, SA); graph.add(S, E); graph.add(A, U); graph.add(B, U); 
+//        graph.add(S, U); graph.add(E, U); graph.add(SA, U);
+//        graph.add(S, A); graph.add(A, E); graph.add(SA, S); graph.add(SA, A);     
         
         System.out.println("The current graph: " + graph.toString());
         
@@ -43,7 +64,7 @@ public class Driver {
         System.out.println("Veertices:" + graph.V());
         System.out.println("Edges" + graph.E());
                
-        PageRank pgobj = new PageRank();
+        PageRankprev pgobj = new PageRankprev();
         
         pgobj.calc(graph);
     }

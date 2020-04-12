@@ -10,14 +10,14 @@ import java.util.Stack;
  * An example class for directed graphs.  The vertex type can be specified.
  * There are no edge costs/weights.
  * 
- * 
  * @author Dey Somanwita
  */
 
 public class Digraph<V extends team> {
 	
     private int V = 0;          
-    private int E = 0;;  
+    private int E = 0;
+    
     
     /**
      * The implementation here is basically an adjacency list, but instead
@@ -28,8 +28,7 @@ public class Digraph<V extends team> {
     
     /**
      * String representation of graph.
-     */
-    public String toString () {
+     */    public String toString () {
         StringBuffer s = new StringBuffer();
         //for (V v: this.neighbors.keySet()) s.append("\n    " + v.getTeamName() + " -> " + this.neighbors.get(v));
         for (V v: this.neighbors.keySet()) {
