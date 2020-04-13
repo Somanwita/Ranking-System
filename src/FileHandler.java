@@ -13,7 +13,7 @@ import java.util.stream.Stream;
  
 public class FileHandler {
    
-    private static String fileName = "C:\\Users\\soman\\OneDrive\\Documents\\NEU\\Second Sem\\Algorithm\\Project\\Ranking-System\\EPLDatatest.csv";
+    private static String fileName = "withoutDraw.csv";
     private static String outputFileName = "RankingData.csv";
     public List<String> write_data = new ArrayList<String>();
 

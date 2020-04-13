@@ -19,7 +19,17 @@ public class Digraph<V extends team> {
     private int E = 0;
     
     
-    /**
+//    public Digraph(int v, int e, Map<V, List<V>> neighbors) {
+//		super();
+//		V = v;
+//		E = e;
+//		this.neighbors = neighbors;
+//		for (V vertex : neighbors.keySet()) {
+//			neighbors.get(vertex).add(null);
+//		}
+//	}
+
+	/**
      * The implementation here is basically an adjacency list, but instead
      * of an array of lists, a Map is used to map each vertex to its list of 
      * adjacent vertices.
@@ -43,8 +53,12 @@ public class Digraph<V extends team> {
     /**
      * Add a vertex to the graph.  Nothing happens if vertex is already in graph.
      */
-    public void add (V vertex) {
-        if (neighbors.containsKey(vertex)) return;
+    public void addVertex (V vertex) {
+       // if (neighbors.containsKey(vertex)) return;
+    	for (V v : neighbors.keySet()) {
+    		if (v.getTeamName().equals(vertex.getTeamName())) {
+    			return; }   		
+    	}
         neighbors.put(vertex, new ArrayList<V>());
         V++;
     }
@@ -58,12 +72,19 @@ public class Digraph<V extends team> {
     
     /**
      * Add an edge to the graph; if either vertex does not exist, it's added.
-     * This implementation allows the creation of multi-edges and self-loops.
+     * This implementation allows the creation of  multi-edges and self-loops.
      */
     public void add (V from, V to) {
-        this.add(from); this.add(to);
-        neighbors.get(from).add(to);
-        E++;
+        this.addVertex(from); this.addVertex(to);
+        for(V v : neighbors.keySet()) {
+        	if(v.getTeamName().equals(from.getTeamName())) {
+        		neighbors.get(v).add(to);
+        		E++;        		
+        	}
+        	
+        }
+        //neighbors.get(from).add(to);
+        
     }
 
     /**
