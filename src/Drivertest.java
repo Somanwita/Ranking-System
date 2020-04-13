@@ -9,16 +9,40 @@ public class Drivertest {
          */
         // Create a Graph with Integer nodes
         Digraph<team> graph = new Digraph<team>();
-        team A = new team("A");
-        team B = new team("B");
-        team C = new team("C");
-        team D = new team("D");
-        team E = new team("E");
+        team Liverpool = new team("Liverpool");
+        team Norwich = new team("Norwich");
+        team WestHam = new team("West Ham");
+        team ManCity = new team("Man City");
+        team Bournemouth = new team("Bournemouth");
+        team SheffieldUnited = new team("Sheffield United");
+        team Burnley = new team("Burnley");
+        team CrystalPalace = new team("Crystal Palace");
+        team Southampton = new team("Southampton");
+        team Everton = new team("Everton");
+        team Watford = new team("Watford");
+        team Brighton = new team("Brighton");
+        team Tottenham = new team("Tottenham");
+        team AstonVilla = new team("Aston Villa");
+        team Leicester = new team("Leicester");
+        team Wolves = new team("Wolves");
             
-        graph.add(A, B); graph.add(C, A); 
-        graph.add(B, E); graph.add(C, B);
-        graph.add(C, D); graph.add(C, E); graph.add(D, C);
-        graph.add(E, D); graph.add(D, E); 
+      graph.add(Norwich, Liverpool); 
+      graph.add(WestHam,ManCity); 
+      graph.add(Bournemouth, SheffieldUnited); // graph.add(SheffieldUnited, Bournemouth);
+      graph.add(Southampton, Burnley); 
+      graph.add(CrystalPalace, Everton); //graph.add(Everton, CrystalPalace);
+      graph.add(Watford, Brighton); 
+      graph.add(AstonVilla, Tottenham); 
+      graph.add(Leicester, Wolves); //graph.add(Wolves, Leicester); 
+        
+//        graph.add(A, B); graph.add(C, A); 
+//        graph.add(B, E); graph.add(C, B);
+//        graph.add(C, D); graph.add(C, E); graph.add(D, C);
+//        graph.add(E, D); graph.add(D, E); 
+//        graph.add(B, A); graph.add(A, C); 
+//        graph.add(E, B); graph.add(B, C);
+//        graph.add(C, D); graph.add(C, E); graph.add(D, C);
+//        graph.add(E, D); graph.add(D, E); 
         
         System.out.println("The current graph: " + graph.toString());
         
