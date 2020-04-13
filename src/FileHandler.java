@@ -7,13 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-
- 
-
  
 public class FileHandler {
    
-    private static String fileName = "withoutDraw.csv";
+    private static String fileName = "EPLData.csv";
     private static String outputFileName = "RankingData.csv";
     public List<String> write_data = new ArrayList<String>();
 
@@ -40,8 +37,7 @@ public class FileHandler {
                 for (String line : write_data) {
                     out.write(line);
                     out.newLine();
-                }
-        
+                }        
         }
         catch (Exception e) {
             e.printStackTrace();
