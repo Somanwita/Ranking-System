@@ -30,4 +30,10 @@ public class RankingClass {
 	public void setFtr(String ftr) {
 		this.ftr = ftr;
 	}
+
+	@Override
+	public String toString() {
+		return "RankingClass [homeTeam=" + homeTeam + ", awayTeam=" + awayTeam + ", ftr=" + ftr + "]";
+	}
+	
 }

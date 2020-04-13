@@ -9,7 +9,7 @@ public class PageRankprev {
 		int edgeCount = graph.E();
 	    Map<team,Double> pageRank = new HashMap<>(totalNodes);
 	    Map<team,Double> TempPageRank = new HashMap<>(totalNodes);
-		final double dampingFactor = 0.85;	
+		final double dampingFactor = 0.05;	
 		
 		double InitialPageRank;
 		double OutgoingLinks=0; 
@@ -80,9 +80,7 @@ public class PageRankprev {
 					    danglingRank += TempPageRank.get(InternalNodeNumber); 
 					} 
 					//System.out.println("Pagerank of " + InternalNodeNumber.getTeamName() + " : " + pageRank.get(InternalNodeNumber));
-
-				}  
-				
+				}  			
 			}    
 			danglingRank *= (dampingFactor / totalNodes);
 			normDiff = 0; 

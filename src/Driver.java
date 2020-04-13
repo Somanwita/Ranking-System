@@ -12,22 +12,27 @@ public class Driver {
     	List<RankingClass> inputData= new ArrayList<>();
     	
     	inputData = filehandler.readTextFile();
+    	 	
     	for (RankingClass data : inputData) {
-    		if (data.getFtr().equals("H"))	{
-    			//System.out.println(data.getAwayTeam());
-    			System.out.println(data.getHomeTeam());
-    			graph.add(data.getAwayTeam(), data.getHomeTeam());
-    		}
-    		else if (data.getFtr().equals("A"))	{
-    			System.out.println(data.getAwayTeam());
-    			//System.out.println(data.getHomeTeam());
-    			graph.add(data.getHomeTeam(), data.getAwayTeam());
-    		}
-    		else if (data.getFtr().equals("D"))	{
-    			graph.add(data.getHomeTeam(), data.getAwayTeam());
-    			graph.add(data.getAwayTeam(), data.getHomeTeam());
-    		}
+    		System.out.println(data.toString());
     	}
+    	
+//    	for (RankingClass data : inputData) {
+//    		if (data.getFtr().equals("H"))	{
+//    			//System.out.println(data.getAwayTeam());
+//    			System.out.println(data.getHomeTeam());
+//    			graph.add(data.getAwayTeam(), data.getHomeTeam());
+//    		}
+//    		else if (data.getFtr().equals("A"))	{
+//    			System.out.println(data.getAwayTeam());
+//    			//System.out.println(data.getHomeTeam());
+//    			graph.add(data.getHomeTeam(), data.getAwayTeam());
+//    		}
+//    		else if (data.getFtr().equals("D"))	{
+//    			graph.add(data.getHomeTeam(), data.getAwayTeam());
+//    			graph.add(data.getAwayTeam(), data.getHomeTeam());
+//    		}
+//    	}
     	
 
      
