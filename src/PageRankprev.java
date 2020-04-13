@@ -1,4 +1,6 @@
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +11,7 @@ public class PageRankprev {
 		int edgeCount = graph.E();
 	    Map<team,Double> pageRank = new HashMap<>(totalNodes);
 	    Map<team,Double> TempPageRank = new HashMap<>(totalNodes);
-		final double dampingFactor = 0.85;	
+		final double dampingFactor = 0.05;	
 		
 		double InitialPageRank;
 		double OutgoingLinks=0; 
@@ -112,9 +114,18 @@ public class PageRankprev {
 //		} 
 	  
 		// Display PageRank
+		LinkedHashMap<team, Double> sortedpageRank = new LinkedHashMap<>();	 
+
+		pageRank.entrySet()
+				.stream()
+				.sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+				.forEachOrdered(x -> sortedpageRank .put(x.getKey(), x.getValue()));
+		
 		System.out.printf("\n Final Page Rank : \n"); 
-		for (team v : graph.neighbors.keySet())	{
-			System.out.printf(" Page Rank of "+v.getTeamName()+" is :\t"+pageRank.get(v)+"\n"); 
+//		System.out.println(sortedpageRank);
+			
+		for (team v : sortedpageRank.keySet())	{
+			System.out.printf(" Page Rank of "+v.getTeamName()+" is :\t"+sortedpageRank.get(v)+"\n"); 
 		}	  
 	}
 }

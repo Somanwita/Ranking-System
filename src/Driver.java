@@ -11,7 +11,10 @@ public class Driver {
     	FileHandler filehandler = new FileHandler();
     	List<RankingClass> inputData= new ArrayList<>();
     	
+    	
     	inputData = filehandler.readTextFile();
+    	System.out.println(inputData);
+    	
     	for (RankingClass data : inputData) {
     		if (data.getFtr().equals("H"))	{
     			//System.out.println(data.getAwayTeam());
