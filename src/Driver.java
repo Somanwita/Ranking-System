@@ -14,10 +14,14 @@ public class Driver {
     	inputData = filehandler.readTextFile();
     	for (RankingClass data : inputData) {
     		if (data.getFtr().equals("H"))	{
-    			graph.add(data.getHomeTeam(), data.getAwayTeam());
+    			//System.out.println(data.getAwayTeam());
+    			System.out.println(data.getHomeTeam());
+    			graph.add(data.getAwayTeam(), data.getHomeTeam());
     		}
     		else if (data.getFtr().equals("A"))	{
-    			graph.add(data.getAwayTeam(), data.getHomeTeam());
+    			System.out.println(data.getAwayTeam());
+    			//System.out.println(data.getHomeTeam());
+    			graph.add(data.getHomeTeam(), data.getAwayTeam());
     		}
     		else if (data.getFtr().equals("D"))	{
     			graph.add(data.getHomeTeam(), data.getAwayTeam());
@@ -25,11 +29,8 @@ public class Driver {
     		}
     	}
     	
-//        /**
-//         * Main program (for testing).
-//         */
-//        // Create a Graph with Integer nodes
-//     
+
+     
 //        team U = new team("USA");
 //        team A = new team("Australia");
 //        team B = new team("Bangladesh");
@@ -44,22 +45,22 @@ public class Driver {
         
         System.out.println("The current graph: " + graph.toString());
         
-        System.out.println("In-degrees: ");
-        Map<team,Integer> inDegree = graph.inDegree();
-        for (team v: inDegree.keySet()) {
-            StringBuffer s = new StringBuffer();
-            s.append("    " + v.getTeamName() + " = " + inDegree.get(v));
-            System.out.println(s.toString());
-        }
-        
-        System.out.println("Out-degrees: ");
-        
-        Map<team,Integer> outDegree = graph.inDegree();
-        for (team v: outDegree.keySet()) {
-            StringBuffer s = new StringBuffer();
-            s.append("    " + v.getTeamName() + " = " + outDegree.get(v));
-            System.out.println(s.toString());
-        }
+//        System.out.println("In-degrees: ");
+//        Map<team,Integer> inDegree = graph.inDegree();
+//        for (team v: inDegree.keySet()) {
+//            StringBuffer s = new StringBuffer();
+//            s.append("    " + v.getTeamName() + " = " + inDegree.get(v));
+//            System.out.println(s.toString());
+//        }
+//        
+//        System.out.println("Out-degrees: ");
+//        
+//        Map<team,Integer> outDegree = graph.inDegree();
+//        for (team v: outDegree.keySet()) {
+//            StringBuffer s = new StringBuffer();
+//            s.append("    " + v.getTeamName() + " = " + outDegree.get(v));
+//            System.out.println(s.toString());
+//        }
         
         System.out.println("Veertices:" + graph.V());
         System.out.println("Edges" + graph.E());

@@ -28,7 +28,8 @@ public class Digraph<V extends team> {
     
     /**
      * String representation of graph.
-     */    public String toString () {
+     */    
+    public String toString () {
         StringBuffer s = new StringBuffer();
         //for (V v: this.neighbors.keySet()) s.append("\n    " + v.getTeamName() + " -> " + this.neighbors.get(v));
         for (V v: this.neighbors.keySet()) {
@@ -108,11 +109,15 @@ public class Digraph<V extends team> {
      */
     public Map<V,Integer> inDegree () {
         Map<V,Integer> result = new HashMap<V,Integer>();
+        //Map<V,List<V>> inDegreeeList = new HashMap<V,List<V>>();
         for (V v: neighbors.keySet()) result.put(v, 0);       // All in-degrees are 0
         for (V from: neighbors.keySet()) {
+        	List<V> vList = new ArrayList<>();
             for (V to: neighbors.get(from)) {
+            	//vList.add(from);
                 result.put(to, result.get(to) + 1);           // Increment in-degree
             }
+            //inDegreeeList.put(from,vList);
         }
         return result;
     }
