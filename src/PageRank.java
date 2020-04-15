@@ -81,14 +81,19 @@ public class PageRank {
 						.sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
 						.forEachOrdered(x -> sortedpageRank.put(x.getKey(), x.getValue()));
 				
-		// Display PageRank
-		System.out.printf("\n Final Page Rank : \n"); 
+//		// Display PageRank
+//		System.out.printf("\n Final Page Rank : \n"); 		
+//		for (team v : sortedpageRank.keySet())	{
+//			System.out.printf(" Page Rank of "+v.getTeamName()+" is :\t"+sortedpageRank.get(v)+"\n"); 
+//		}
 		
+		// Display Ranking order
+		System.out.printf("\nRank\tTeam Name \tPageRank\n"); 		
+		int i = 1;
 		for (team v : sortedpageRank.keySet())	{
-			System.out.printf(" Page Rank of "+v.getTeamName()+" is :\t"+sortedpageRank.get(v)+"\n"); 
-		}
-		
-		
+			System.out.printf(i + "\t"+v.getTeamName() + "  \t"+ sortedpageRank.get(v)+"\n"); 
+			i++;
+		}	
 		
 		for (team v : graph.neighbors.keySet())	{
 			for (team w : graph.neighbors.keySet()) {
