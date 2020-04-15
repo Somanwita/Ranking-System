@@ -21,7 +21,7 @@ public class EdgeWeightedDiGraph<team, Edge> {
 	}
 	
 	public void addEdge(team sourceVertex, team targetVertex, double weight) {
-		Edge e = new Edge(sourceVertex, targetVertex, weight);		
+		Edge e = new Edge(sourceVertex, targetVertex, weight);			
 		vertices.add(sourceVertex);
 		vertices.add(targetVertex);
 		edges.add(e);

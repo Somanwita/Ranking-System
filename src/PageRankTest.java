@@ -19,15 +19,6 @@ public class PageRankTest {
         graph.addEdge(S, U, 1); graph.addEdge(E, U, 1); graph.addEdge(SA, U, 1); graph.addEdge(SA, A, 1); 
         graph.addEdge(S, A, 1); graph.addEdge(A, E, 1); graph.addEdge(SA, S, 1);
 		
-//            g.addVertex(U);
-//            g.addVertex(A);
-//            g.addVertex(B);
-//            g.addVertex(S);
-//            g.addVertex(E);
-//            g.addVertex(SA);
-//            g.setEdgeWeight(g.addEdge(U, A), 75.0);
-//            g.setEdgeWeight(g.addEdge(A, B), 20.0);
-//            g.setEdgeWeight(g.addEdge(B, U), 5.0);
 
             PageRank<team, Edge> pr = new PageRank(graph, 0.15, 100, 0.0001);
             

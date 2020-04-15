@@ -6,7 +6,11 @@ public class matchDetails {
     private int noMatchesLost;
     private int noDrawMatches;
     
-    public matchDetails(team team, team opponents, int totalNoMatchesPlayed, int noMatchesLost, int noDrawMatches) {
+    public matchDetails() {
+		super();
+	}
+
+	public matchDetails(team team, team opponents, int totalNoMatchesPlayed, int noMatchesLost, int noDrawMatches) {
 		super();
 		this.team = team;
 		this.opponents = opponents;

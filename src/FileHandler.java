@@ -1,20 +1,23 @@
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
  
 public class FileHandler {
    
-    private static String fileName = "EPLData.csv";
-    private static String outputFileName = "RankingData.csv";
-    public List<String> write_data = new ArrayList<String>();
+    Map<team, Integer> totmatches = new HashMap<>();
+    Map<team, Integer> totmerginOfVictory = new HashMap<>();
+    Map<team, Integer> totmerginOfLoss = new HashMap<>();
 
- 
+    private static String fileName = "EdgeEPLData.csv";
+    //private static String outputFileName = "RankingData.csv";
+    public List<String> write_data = new ArrayList<String>();
 
     //Delimiter used in CSV file
     private static final String COMMA_DELIMITER = ",";
@@ -25,9 +28,7 @@ public class FileHandler {
      * @param write_data : a list of strings
      * Returns nothing
      */
-    public void writeTextFile(String outputFileName, List<String> write_data)    {
-        
-        
+    public void writeTextFile(String outputFileName, List<String> write_data)    {      
         try(BufferedWriter out = new BufferedWriter( new FileWriter(outputFileName, true))) {
             /**
              * write a line at a time 
@@ -41,35 +42,112 @@ public class FileHandler {
         }
         catch (Exception e) {
             e.printStackTrace();
-        }
-        
+        }        
     }    
+    
     /**
     * Read csv file
     * @param fileName
     * Returns dataArray which is a list of strings
     */    
-    public List<RankingClass> readTextFile() {        
-        
+    public List<RankingClass> readTextFile() {              
         List<RankingClass> dataArray = new ArrayList<RankingClass>();          
         try {
             String thisLine = null;
             FileReader fr;
             fr = new FileReader(fileName);
-            BufferedReader br = new BufferedReader(fr);
-            
+            BufferedReader br = new BufferedReader(fr);           
             br.readLine();
             while ((thisLine = br.readLine()) != null) {    
                 
                 String[] tokens = thisLine.split(COMMA_DELIMITER);                
                 
-                team hometeam = new team(tokens[0]);
-                team awayteam = new team(tokens[1]);
-                String ftr = tokens[2];
+//                team hometeam = new team(tokens[0]);
+//                team awayteam = new team(tokens[1]);
+//                String ftr = tokens[2];
                 
-                RankingClass obj = new RankingClass(hometeam, awayteam, ftr);
+                String hometeamName = tokens[0];
+                String awayteamName = tokens[1];
+                int homenoOfgoals = Integer.parseInt(tokens[2]);
+                int awaynoOfgoals = Integer.parseInt(tokens[3]);
+                String ftr = tokens[4];
                 
-                //String data = obj.toString();                
+                team hometeam = new team(hometeamName);                           
+                team awayteam = new team(awayteamName);
+                
+                boolean hometotmatchAdded = false;
+                boolean awaytotmatchAdded = false; 
+                
+                if (totmatches.size() == 0) {
+                	totmatches.put(hometeam, 1);
+                    totmatches.put(awayteam, 1);	
+                    hometotmatchAdded = true;
+                    awaytotmatchAdded = true; 
+                }
+                
+                if (hometotmatchAdded == false)   {
+                	for (team x : totmatches.keySet()) {
+                		if (x.getTeamName().equals(hometeamName)) {
+                			int hometotmtch = totmatches.get(x)+1;
+                			totmatches.put(x, hometotmtch);
+                			hometotmatchAdded = true;
+                		}
+                	}
+                }
+                
+                if (awaytotmatchAdded == false) {
+                 	for (team x : totmatches.keySet()) {
+                		if (x.getTeamName().equals(awayteamName)) {
+                			int awaytotmtch = totmatches.get(x)+1;
+                			totmatches.put(x, awaytotmtch);
+                			awaytotmatchAdded = true;
+                		}
+                	}
+                }
+                
+                if (hometotmatchAdded == false &&  awaytotmatchAdded == false) {
+                	totmatches.put(hometeam, 1);
+                	hometotmatchAdded = true;
+                    totmatches.put(awayteam, 1);
+                    awaytotmatchAdded = true;
+                }
+
+                boolean hometotmerginVictory = false;
+                boolean awaytotmerginVictory = false; 
+                
+                if (totmerginOfVictory.size() == 0) {
+                	totmerginOfVictory.put(hometeam, homenoOfgoals - awaynoOfgoals);
+                	totmerginOfVictory.put(awayteam, awaynoOfgoals - homenoOfgoals);	
+                	hometotmerginVictory = true;
+                	awaytotmerginVictory = true; 
+                }
+                
+                if (hometotmerginVictory == false)   {
+                	for (team y : totmerginOfVictory.keySet()) {
+                		if (y.getTeamName().equals(hometeamName)) {
+                			int hometotmtch = totmerginOfVictory.get(y)+(homenoOfgoals - awaynoOfgoals);
+                			totmerginOfVictory.put(y, hometotmtch);
+                			hometotmerginVictory = true;
+                		}
+                	}
+                }
+                
+                if (awaytotmerginVictory == false) { 
+                	for (team y : totmerginOfVictory.keySet()) {
+                		 if (y.getTeamName().equals(awayteamName)) {
+                			int awaytotmtch = totmerginOfVictory.get(y)+(awaynoOfgoals - homenoOfgoals);
+                			totmerginOfVictory.put(y, awaytotmtch);
+                			awaytotmerginVictory = true;
+                		}
+                	}
+                }              
+                if (hometotmerginVictory == false &&  awaytotmerginVictory == false) {
+                	totmerginOfVictory.put(hometeam, (homenoOfgoals - awaynoOfgoals));
+                	hometotmerginVictory = true;
+                	totmerginOfVictory.put(awayteam, (awaynoOfgoals - homenoOfgoals));
+                	awaytotmerginVictory = true;
+                }               
+                RankingClass obj = new RankingClass(hometeam, awayteam, ftr);           
                 dataArray.add(obj);                  
             }            
         }
@@ -78,34 +156,6 @@ public class FileHandler {
         }
         return dataArray;
 
- 
-
- 
-
- 
-
     }
-
- 
-
- 
-
- 
-
-//    public void demo() {
-//        System.out.println("\n\t FileUtil.demo...");
-//     
-//                
-//        //    Creates File object to read and write file
-//        FileHandler Fobj = new FileHandler();
-//        write_data = Fobj.readTextFile(fileName);    
-//        // Write data in file
-//        Fobj.writeTextFile(outputFileName, write_data);    
-//        
-//        //    Print all the object data
-//        System.out.println(write_data);
-//        
-//        System.out.println("\n\t FileUtil.demo...done!");
-//    }
         
 }

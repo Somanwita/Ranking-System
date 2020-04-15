@@ -18,17 +18,6 @@ public class Digraph<V extends team> {
     private int V = 0;          
     private int E = 0;
     
-    
-//    public Digraph(int v, int e, Map<V, List<V>> neighbors) {
-//		super();
-//		V = v;
-//		E = e;
-//		this.neighbors = neighbors;
-//		for (V vertex : neighbors.keySet()) {
-//			neighbors.get(vertex).add(null);
-//		}
-//	}
-
 	/**
      * The implementation here is basically an adjacency list, but instead
      * of an array of lists, a Map is used to map each vertex to its list of 
@@ -57,7 +46,8 @@ public class Digraph<V extends team> {
        // if (neighbors.containsKey(vertex)) return;
     	for (V v : neighbors.keySet()) {
     		if (v.getTeamName().equals(vertex.getTeamName())) {
-    			return; }   		
+    			return; 
+    		}   		
     	}
         neighbors.put(vertex, new ArrayList<V>());
         V++;
@@ -78,6 +68,13 @@ public class Digraph<V extends team> {
         this.addVertex(from); this.addVertex(to);
         for(V v : neighbors.keySet()) {
         	if(v.getTeamName().equals(from.getTeamName())) {
+        		for (V w : neighbors.keySet()) {
+        			if (w.getTeamName().equals(to.getTeamName())) {
+        				neighbors.get(v).add(w);
+        				E++;
+        				return;
+        			}
+        		}
         		neighbors.get(v).add(to);
         		E++;        		
         	}
@@ -130,15 +127,12 @@ public class Digraph<V extends team> {
      */
     public Map<V,Integer> inDegree () {
         Map<V,Integer> result = new HashMap<V,Integer>();
-        //Map<V,List<V>> inDegreeeList = new HashMap<V,List<V>>();
         for (V v: neighbors.keySet()) result.put(v, 0);       // All in-degrees are 0
         for (V from: neighbors.keySet()) {
         	List<V> vList = new ArrayList<>();
             for (V to: neighbors.get(from)) {
-            	//vList.add(from);
                 result.put(to, result.get(to) + 1);           // Increment in-degree
             }
-            //inDegreeeList.put(from,vList);
         }
         return result;
     }

@@ -16,7 +16,7 @@ public final class PageRank<team, Edge>
     /**
      * Damping factor default value.
      */
-    public static final double DAMPING_FACTOR_DEFAULT = 0.85d;
+    public static final double DAMPING_FACTOR_DEFAULT = 0.05d;
 
     /**
      * The input graph
