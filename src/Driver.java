@@ -6,9 +6,7 @@ public class Driver {
 
     public static void main(String[] args) {
     	Digraph<team> graph = new Digraph<>();
-    	
-    	//EdgeWeightedDiGraph<team, Edge> graph = new EdgeWeightedDiGraph<>();
-    	
+    	    	
     	FileHandler filehandler = new FileHandler();
     	List<RankingClass> inputData= new ArrayList<>();
     	
@@ -32,7 +30,7 @@ public class Driver {
         System.out.println("Vertices:" + graph.V());
         System.out.println("Edges" + graph.E());
                
-        PageRankprev pgobj = new PageRankprev();
+        PageRank pgobj = new PageRank();
         pgobj.calc(graph, filehandler);
         
     }

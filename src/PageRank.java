@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class PageRankprev {
+public class PageRank {
 	public void calc(Digraph<team> graph, FileHandler filehandler)	{	
 		int totalNodes = graph.V();
 		int edgeCount = graph.E();
