@@ -51,7 +51,7 @@ public class PageRankprev {
 							sum += val ;
 						}
 						else {
-							double val = TempPageRank.get(ExternalNodeNumber)*(1/2);
+							double val = TempPageRank.get(ExternalNodeNumber)*(1/1.6);
 							sum += val ;
 						}
 					}
@@ -103,25 +103,58 @@ public class PageRankprev {
 					
 					if (vp > wp)	{
 						System.out.println(v.getTeamName() + " team should win!!");
-						double avgmerginOfVictoryWin = filehandler.totmerginOfVictory.get(v)/filehandler.totmatches.get(v);
-						System.out.println("Average mergin of victory of winning team " + v.getTeamName() + " is : " + avgmerginOfVictoryWin);			
-						System.out.println("Total number of matches played by winning team " + w.getTeamName() + " is : " + filehandler.totmatches.get(v));
 						
-						double avgmerginOfVictoryLoss = filehandler.totmerginOfVictory.get(w)/filehandler.totmatches.get(w);
-						System.out.println("Average mergin of victory of loosing team " + w.getTeamName() + " is : " + avgmerginOfVictoryLoss);
-						System.out.println("Total number of matches played by loosing team " + w.getTeamName() + " is : " + filehandler.totmatches.get(w));
+						double avgmerginOfVictoryWinning = filehandler.totmerginOfVictory.get(v.getTeamName())/filehandler.totmatches.get(v.getTeamName());
+						double avgmerginOfLossWinnning = filehandler.totmerginOfLoss.get(v.getTeamName())/filehandler.totmatches.get(v.getTeamName());
+						
+						System.out.println("Total mergin of victory of winning team " + v.getTeamName() + " is : +  " + filehandler.totmerginOfVictory.get(v.getTeamName()));
+						System.out.println("Total mergin of loss of winning team " + v.getTeamName() + " is : +  " + filehandler.totmerginOfLoss.get(v.getTeamName()));						
+						System.out.println("Average mergin of Victory of winning team " + v.getTeamName() + " is : " + avgmerginOfVictoryWinning);			
+						System.out.println("Average mergin of Loss of winning team " + v.getTeamName() + " is : " + avgmerginOfLossWinnning);
+						System.out.println("Maximum mergin of Victory of winning team " + v.getTeamName() + " is : " + filehandler.maxmerginOfVictory.get(v.getTeamName()));			
+						System.out.println("Maximum mergin of Loss of winning team " + v.getTeamName() + " is : " + filehandler.maxmerginOfLoss.get(v.getTeamName()));
+						System.out.println("Total number of matches played by winning team " + v.getTeamName() + " is : " + filehandler.totmatches.get(v.getTeamName()));
+						
+						System.out.println();
+						
+						double avgmerginOfVictoryLoosing = filehandler.totmerginOfVictory.get(w.getTeamName())/filehandler.totmatches.get(w.getTeamName());
+						double avgmerginOfLossLoosing = filehandler.totmerginOfLoss.get(w.getTeamName())/filehandler.totmatches.get(w.getTeamName());
+						
+						System.out.println("Total mergin of victory of loosing team " + w.getTeamName() + " is : " + filehandler.totmerginOfVictory.get(w.getTeamName()));
+						System.out.println("Total mergin of loss of loosing team " + w.getTeamName() + " is : " + filehandler.totmerginOfLoss.get(w.getTeamName()));
+						System.out.println("Average mergin of Victory of loosing team " + w.getTeamName() + " is : " + avgmerginOfVictoryLoosing);
+						System.out.println("Average mergin of Loss of loosing team " + w.getTeamName() + " is : " + avgmerginOfLossLoosing);
+						System.out.println("Maximum mergin of Victory of loosing team " + w.getTeamName() + " is : " + filehandler.maxmerginOfVictory.get(w.getTeamName()));			
+						System.out.println("Maximum mergin of Loss of loosing team " + w.getTeamName() + " is : " + filehandler.maxmerginOfLoss.get(w.getTeamName()));
+						System.out.println("Total number of matches played by loosing team " + w.getTeamName() + " is : " + filehandler.totmatches.get(w.getTeamName()));
 
 					}
 					else if (vp < wp) {
 						System.out.println(w.getTeamName() + " team should win!!");
-						double avgmerginOfVictoryWin = filehandler.totmerginOfVictory.get(w)/filehandler.totmatches.get(w);
-						System.out.println("Average mergin of victory of winning team " + w.getTeamName() + " is : " + avgmerginOfVictoryWin);
-						System.out.println("Total number of matches played by winning team " + w.getTeamName() + " is : " + filehandler.totmatches.get(w));
 						
-						double avgmerginOfVictoryLoss = filehandler.totmerginOfVictory.get(v)/filehandler.totmatches.get(v);
-						System.out.println("Average mergin of victory of loosing team " + v.getTeamName() + " is : " + avgmerginOfVictoryLoss);
-						System.out.println("Total number of matches played by loosing team " + v.getTeamName() + " is : " + filehandler.totmatches.get(v));
-
+						double avgmerginOfVictoryWinning = filehandler.totmerginOfVictory.get(w.getTeamName())/filehandler.totmatches.get(w.getTeamName());
+						double avgmerginOfLossWinning = filehandler.totmerginOfLoss.get(w.getTeamName())/filehandler.totmatches.get(w.getTeamName());
+						
+						System.out.println("Total mergin of victory of winning team " + w.getTeamName() + " is : " + filehandler.totmerginOfVictory.get(w.getTeamName()));
+						System.out.println("Total mergin of loss of winning team " + w.getTeamName() + " is : " + filehandler.totmerginOfLoss.get(w.getTeamName()));
+						System.out.println("Average mergin of Victory of winning team " + w.getTeamName() + " is : " + avgmerginOfVictoryWinning);
+						System.out.println("Average mergin of Loss of winning team " + w.getTeamName() + " is : " + avgmerginOfLossWinning);
+						System.out.println("Maximum mergin of Victory of winning team " + w.getTeamName() + " is : " + filehandler.maxmerginOfVictory.get(w.getTeamName()));			
+						System.out.println("Maximum mergin of Loss of winning team " + w.getTeamName() + " is : " + filehandler.maxmerginOfLoss.get(w.getTeamName()));									
+						System.out.println("Total number of matches played by winning team " + w.getTeamName() + " is : " + filehandler.totmatches.get(w.getTeamName()));
+						
+						System.out.println();
+						
+						double avgmerginOfVictoryLoosing = filehandler.totmerginOfVictory.get(v.getTeamName())/filehandler.totmatches.get(v.getTeamName());
+						double avgmerginOfLossLoosing = filehandler.totmerginOfLoss.get(v.getTeamName())/filehandler.totmatches.get(v.getTeamName());
+						
+						System.out.println("Total mergin of victory of loosing team " + v.getTeamName() + " is : " + filehandler.totmerginOfVictory.get(v.getTeamName()));
+						System.out.println("Total mergin of loss of loosing team " + v.getTeamName() + " is : " + filehandler.totmerginOfLoss.get(v.getTeamName()));
+						System.out.println("Average mergin of Victory of loosing team " + v.getTeamName() + " is : " + avgmerginOfVictoryLoosing);
+						System.out.println("Average mergin of Loss of loosing team " + v.getTeamName() + " is : " + avgmerginOfLossLoosing);
+						System.out.println("Maximum mergin of Victory of loosing team " + v.getTeamName() + " is : " + filehandler.maxmerginOfVictory.get(v.getTeamName()));			
+						System.out.println("Maximum mergin of Loss of loosing team " + v.getTeamName() + " is : " + filehandler.maxmerginOfLoss.get(v.getTeamName()));
+						System.out.println("Total number of matches played by loosing team " + v.getTeamName() + " is : " + filehandler.totmatches.get(v.getTeamName()));
 					}
 					else {
 						System.out.println("Both team have same chance of win!!");
