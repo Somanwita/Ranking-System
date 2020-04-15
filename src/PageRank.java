@@ -18,11 +18,16 @@ public class PageRank {
 
 		InitialPageRank = (double) 1/totalNodes;
 	 
-		// 0th ITERATION  _ OR _ INITIALIZATION PHASE
+		/*
+		 *  At Initialization Phase all nodes have equal weights
+		 */
 		for (team v : graph.neighbors.keySet()) {
 			pageRank.put(v,InitialPageRank);
 		}   
    
+		/*
+		 * Calculate Pagerank of each node
+		 */
 		double normDiff;
 		double precision = 1e-5;
 		boolean uptoDate = false;
@@ -94,6 +99,10 @@ public class PageRank {
 			System.out.printf(i + "\t"+v.getTeamName() + "  \t"+ sortedpageRank.get(v)+"\n"); 
 			i++;
 		}	
+		
+		/*
+		 * Display Prediction of matches for each pair of team
+		 */
 		
 		for (team v : graph.neighbors.keySet())	{
 			for (team w : graph.neighbors.keySet()) {

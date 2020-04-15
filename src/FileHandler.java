@@ -20,7 +20,7 @@ public class FileHandler {
 
     private static String fileName = "EdgeEPLData.csv";
     //private static String outputFileName = "RankingData.csv";
-    public List<String> write_data = new ArrayList<String>();
+    //public List<String> write_data = new ArrayList<String>();
 
     //Delimiter used in CSV file
     private static final String COMMA_DELIMITER = ",";
@@ -64,11 +64,7 @@ public class FileHandler {
             while ((thisLine = br.readLine()) != null) {    
                 
                 String[] tokens = thisLine.split(COMMA_DELIMITER);                
-                
-//                team hometeam = new team(tokens[0]);
-//                team awayteam = new team(tokens[1]);
-//                String ftr = tokens[2];
-                
+                               
                 String hometeamName = tokens[0];
                 String awayteamName = tokens[1];
                 int homenoOfgoals = Integer.parseInt(tokens[2]);
@@ -78,6 +74,9 @@ public class FileHandler {
                 team hometeam = new team(hometeamName);                           
                 team awayteam = new team(awayteamName);
                 
+                /*
+                 * Add RankingClass object
+                 */
                 RankingClass obj = new RankingClass(hometeam, awayteam, ftr);           
                 dataArray.add(obj);   
                 
