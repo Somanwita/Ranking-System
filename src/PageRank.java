@@ -183,26 +183,46 @@ public class PageRank {
 		/*
 		 * Display Prediction of matches between teams that did happen
 		 */
-		
+		normalDistri normalDistri = new normalDistri();
+                     
 		for (team v : graph.neighbors.keySet())	{
 			for (team w : graph.neighbors.keySet()) {
-		if(!graph.neighbors.get(v).contains(w) && !v.equals(w)) {
-			double vp = sortedpageRank.get(v)/(sortedpageRank.get(v) + sortedpageRank.get(w));
-			double wp = sortedpageRank.get(w)/(sortedpageRank.get(v) + sortedpageRank.get(w));
-			if(vp > wp) {
-			System.out.println();
+		if(!v.getTeamName().equals(w.getTeamName())) {
+//			double avgmarginOfVictoryWinning = filehandler.totmarginOfVictory.get(v.getTeamName())/filehandler.totmatches.get(v.getTeamName());
+
+			double meanofV = normalDistri.mean(filehandler.teamAndOpponents.get(v.getTeamName()));
+			double meanOfW = normalDistri.mean(filehandler.teamAndOpponents.get(w.getTeamName()));
+	        double sdV = normalDistri.standardDeviation(filehandler.teamAndOpponents.get(v.getTeamName()), meanofV);
+	        
+	        double sdW = normalDistri.standardDeviation(filehandler.teamAndOpponents.get(w.getTeamName()), meanOfW);
+	         
+	        double valueOfV = normalDistri.calculateND(filehandler.maxmarginOfVictory.get(v.getTeamName()), meanofV, sdV);
+	        double valueofW = normalDistri.calculateND(filehandler.maxmarginOfVictory.get(w.getTeamName()), meanOfW, sdW);
+	        double winningPercentOfV = valueOfV /(valueOfV+valueofW);
+	        double winningPercentOfW = valueofW/ (valueOfV+valueofW);
+	        
+	        System.out.println();
 			System.out.println("Prediction of Result for Match between " + v.getTeamName() + " and " + w.getTeamName());
 			System.out.println("---------------------------------------------------------------------");
-			System.out.println("Probability of " + v.getTeamName() + " Winning  is : " + vp); 
-			System.out.println("Probability of " + w.getTeamName() + " Winning is : " + wp); 
-			}
-			else {
-				System.out.println();
-				System.out.println("Prediction of Result for Match between " + v.getTeamName() + " and " + w.getTeamName());
-				System.out.println("---------------------------------------------------------------------");
-				System.out.println("Probability of " + v.getTeamName() + " Winning is : " + vp); 
-				System.out.println("Probability of " + w.getTeamName() + " Winning is : " + wp); 
-			}
+			System.out.println("Probability of " + v.getTeamName() + " Winning  is : " + winningPercentOfV*100); 
+			System.out.println("Probability of " + w.getTeamName() + " Winning is : " + winningPercentOfW*100); 
+
+//			double vp = sortedpageRank.get(v)/(sortedpageRank.get(v) + sortedpageRank.get(w));
+//			double wp = sortedpageRank.get(w)/(sortedpageRank.get(v) + sortedpageRank.get(w));
+//			if(vp > wp) {
+//			System.out.println();
+//			System.out.println("Prediction of Result for Match between " + v.getTeamName() + " and " + w.getTeamName());
+//			System.out.println("---------------------------------------------------------------------");
+//			System.out.println("Probability of " + v.getTeamName() + " Winning  is : " + vp); 
+//			System.out.println("Probability of " + w.getTeamName() + " Winning is : " + wp); 
+//			}
+//			else {
+//				System.out.println();
+//				System.out.println("Prediction of Result for Match between " + v.getTeamName() + " and " + w.getTeamName());
+//				System.out.println("---------------------------------------------------------------------");
+//				System.out.println("Probability of " + v.getTeamName() + " Winning is : " + vp); 
+//				System.out.println("Probability of " + w.getTeamName() + " Winning is : " + wp); 
+//			}
 		}
 			}
 		}

@@ -11,13 +11,13 @@ import java.util.stream.Stream;
  
 public class FileHandler {
    
-    Map<String, Integer> totmatches = new HashMap<>();
-    Map<String, Integer> totmarginOfVictory = new HashMap<>();
-    Map<String, Integer> totmarginOfLoss = new HashMap<>();
-    Map<String,Integer> listOfOpponents = new HashMap<String, Integer>();
-    Map<String, Map<String,Integer>> teamAndOpponents = new HashMap<>();
-    Map<String, Integer> maxmarginOfVictory = new HashMap<>();
-    Map<String, Integer> maxmarginOfLoss = new HashMap<>();
+    Map<String, Double> totmatches = new HashMap<>();
+    Map<String, Double> totmarginOfVictory = new HashMap<>();
+    Map<String, Double> totmarginOfLoss = new HashMap<>();
+//    Map<String,Integer> listOfOpponents = new HashMap<String, Integer>();
+    Map<String, List<Double>> teamAndOpponents = new HashMap<>();
+    Map<String, Double> maxmarginOfVictory = new HashMap<>();
+    Map<String, Double> maxmarginOfLoss = new HashMap<>();
 
     private static String fileName = "EdgeEPLData.csv";
     //private static String outputFileName = "RankingData.csv";
@@ -68,26 +68,37 @@ public class FileHandler {
                                
                 String hometeamName = tokens[0];
                 String awayteamName = tokens[1];
-                int homenoOfgoals = Integer.parseInt(tokens[2]);
-                int awaynoOfgoals = Integer.parseInt(tokens[3]);
+                double homenoOfgoals = Double.parseDouble(tokens[2]);
+                double awaynoOfgoals = Double.parseDouble(tokens[3]);
                 String ftr = tokens[4];
                 
-                int goalDiff = homenoOfgoals-awaynoOfgoals;
+                double goalDiff1 = homenoOfgoals-awaynoOfgoals;
+                double goalDiff2 = awaynoOfgoals - homenoOfgoals;
                 
                 team hometeam = new team(hometeamName);   
                 team awayteam = new team(awayteamName);
                 /*
         		 * Store Goal Diff of each team with all the teams it has played
         		 */
-//                if(!teamAndOpponents.containsKey(hometeam)) {
-//                	teamAndOpponents.put(hometeamName, new HashMap<String, Integer>());
-//                	teamAndOpponents.get(hometeamName).put(awayteamName, goalDiff);
-//                	
-//                }
-//                else {
-//                	teamAndOpponents.get(hometeamName).put(awayteamName, goalDiff);
-//                	
-//                }
+                if(!teamAndOpponents.containsKey(hometeamName)) {
+                	teamAndOpponents.put(hometeamName, new ArrayList<Double>() );
+                	teamAndOpponents.get(hometeamName).add(goalDiff1);                	
+                }
+            	else {
+            		teamAndOpponents.get(hometeamName).add(goalDiff1);  
+            	
+            	}
+            
+                if(!teamAndOpponents.containsKey(awayteamName)) {
+                	teamAndOpponents.put(awayteamName, new ArrayList<Double>());
+                	teamAndOpponents.get(awayteamName).add(goalDiff2);  
+                }
+                else {
+                	teamAndOpponents.get(awayteamName).add(goalDiff2);  
+                	
+                }
+                
+                
                 
                 
                 /*
@@ -100,23 +111,23 @@ public class FileHandler {
                  * Calculate total number of match for each team
                  */
                 if (totmatches.size() == 0) {
-                	totmatches.put(hometeamName, 1);
-                	totmatches.put(awayteamName, 1);
+                	totmatches.put(hometeamName, 1.0);
+                	totmatches.put(awayteamName, 1.0);
                 }
                 else if (totmatches.containsKey(hometeamName) && totmatches.containsKey(awayteamName)) {
                 	totmatches.put(hometeamName, totmatches.get(hometeamName) + 1);
                 	totmatches.put(awayteamName, totmatches.get(awayteamName) + 1);              		
                 	}
                 else {
-                	totmatches.put(hometeamName, 1);
-                	totmatches.put(awayteamName, 1);
+                	totmatches.put(hometeamName, 1.0);
+                	totmatches.put(awayteamName, 1.0);
                 }
                 
                 /*
                  * Calculate total Margin Of Victory for each team
                  */
-                int hometeammarginofVictory = homenoOfgoals - awaynoOfgoals;
-                int awayteammarginofVictory = awaynoOfgoals - homenoOfgoals;
+                double hometeammarginofVictory = homenoOfgoals - awaynoOfgoals;
+                double awayteammarginofVictory = awaynoOfgoals - homenoOfgoals;
                                
                 if (totmarginOfVictory.size() == 0) {
                 	totmarginOfVictory.put(hometeamName, hometeammarginofVictory);
@@ -137,8 +148,8 @@ public class FileHandler {
                 /*
                  * Calculate total Margin Of Loss for each team
                  */
-                int hometeammarginofLoss = awaynoOfgoals - homenoOfgoals;
-                int awayteammarginofLoss = homenoOfgoals - awaynoOfgoals;
+                double hometeammarginofLoss = awaynoOfgoals - homenoOfgoals;
+                double awayteammarginofLoss = homenoOfgoals - awaynoOfgoals;
                 
                 if (totmarginOfLoss.size() == 0) {
                 	totmarginOfLoss.put(hometeamName, hometeammarginofLoss);
