@@ -12,11 +12,12 @@ import java.util.stream.Stream;
 public class FileHandler {
    
     Map<String, Integer> totmatches = new HashMap<>();
-    Map<String, Integer> totmerginOfVictory = new HashMap<>();
-    Map<String, Integer> totmerginOfLoss = new HashMap<>();
-    
-    Map<String, Integer> maxmerginOfVictory = new HashMap<>();
-    Map<String, Integer> maxmerginOfLoss = new HashMap<>();
+    Map<String, Integer> totmarginOfVictory = new HashMap<>();
+    Map<String, Integer> totmarginOfLoss = new HashMap<>();
+    Map<String,Integer> listOfOpponents = new HashMap<String, Integer>();
+    Map<String, Map<String,Integer>> teamAndOpponents = new HashMap<>();
+    Map<String, Integer> maxmarginOfVictory = new HashMap<>();
+    Map<String, Integer> maxmarginOfLoss = new HashMap<>();
 
     private static String fileName = "EdgeEPLData.csv";
     //private static String outputFileName = "RankingData.csv";
@@ -71,8 +72,23 @@ public class FileHandler {
                 int awaynoOfgoals = Integer.parseInt(tokens[3]);
                 String ftr = tokens[4];
                 
-                team hometeam = new team(hometeamName);                           
+                int goalDiff = homenoOfgoals-awaynoOfgoals;
+                
+                team hometeam = new team(hometeamName);   
                 team awayteam = new team(awayteamName);
+                /*
+        		 * Store Goal Diff of each team with all the teams it has played
+        		 */
+//                if(!teamAndOpponents.containsKey(hometeam)) {
+//                	teamAndOpponents.put(hometeamName, new HashMap<String, Integer>());
+//                	teamAndOpponents.get(hometeamName).put(awayteamName, goalDiff);
+//                	
+//                }
+//                else {
+//                	teamAndOpponents.get(hometeamName).put(awayteamName, goalDiff);
+//                	
+//                }
+                
                 
                 /*
                  * Add RankingClass object
@@ -99,71 +115,74 @@ public class FileHandler {
                 /*
                  * Calculate total Margin Of Victory for each team
                  */
-                int hometeammerginofVictory = homenoOfgoals - awaynoOfgoals;
-                int awayteammerginofVictory = awaynoOfgoals - homenoOfgoals;
+                int hometeammarginofVictory = homenoOfgoals - awaynoOfgoals;
+                int awayteammarginofVictory = awaynoOfgoals - homenoOfgoals;
                                
-                if (totmerginOfVictory.size() == 0) {
-                	totmerginOfVictory.put(hometeamName, hometeammerginofVictory);
-                	totmerginOfVictory.put(awayteamName, awayteammerginofVictory);
+                if (totmarginOfVictory.size() == 0) {
+                	totmarginOfVictory.put(hometeamName, hometeammarginofVictory);
+                	totmarginOfVictory.put(awayteamName, awayteammarginofVictory);
                 }
-                else if (totmerginOfVictory.containsKey(hometeamName) && totmerginOfVictory.containsKey(awayteamName)) {
-                	totmerginOfVictory.put(hometeamName, totmerginOfVictory.get(hometeamName) + hometeammerginofVictory);
-                	totmerginOfVictory.put(awayteamName, totmerginOfVictory.get(awayteamName) + awayteammerginofVictory);              		
+                else if (totmarginOfVictory.containsKey(hometeamName) && totmarginOfVictory.containsKey(awayteamName)) {
+                	totmarginOfVictory.put(hometeamName, totmarginOfVictory.get(hometeamName) + hometeammarginofVictory);
+                	totmarginOfVictory.put(awayteamName, totmarginOfVictory.get(awayteamName) + awayteammarginofVictory);              		
                 	}
                 else {
-                	totmerginOfVictory.put(hometeamName, hometeammerginofVictory);
-                	totmerginOfVictory.put(awayteamName, awayteammerginofVictory);
+                	totmarginOfVictory.put(hometeamName, hometeammarginofVictory);
+                	totmarginOfVictory.put(awayteamName, awayteammarginofVictory);
                 }
+                
+                
+                
                 
                 /*
                  * Calculate total Margin Of Loss for each team
                  */
-                int hometeammerginofLoss = awaynoOfgoals - homenoOfgoals;
-                int awayteammerginofLoss = homenoOfgoals - awaynoOfgoals;
+                int hometeammarginofLoss = awaynoOfgoals - homenoOfgoals;
+                int awayteammarginofLoss = homenoOfgoals - awaynoOfgoals;
                 
-                if (totmerginOfLoss.size() == 0) {
-                	totmerginOfLoss.put(hometeamName, hometeammerginofLoss);
-                	totmerginOfLoss.put(awayteamName, awayteammerginofLoss);
+                if (totmarginOfLoss.size() == 0) {
+                	totmarginOfLoss.put(hometeamName, hometeammarginofLoss);
+                	totmarginOfLoss.put(awayteamName, awayteammarginofLoss);
                 }
-                else if (totmerginOfLoss.containsKey(hometeamName) && totmerginOfLoss.containsKey(awayteamName)) {
-                	totmerginOfLoss.put(hometeamName, totmerginOfLoss.get(hometeamName) + hometeammerginofLoss);
-                	totmerginOfLoss.put(awayteamName, totmerginOfLoss.get(awayteamName) + awayteammerginofLoss);              		
+                else if (totmarginOfLoss.containsKey(hometeamName) && totmarginOfLoss.containsKey(awayteamName)) {
+                	totmarginOfLoss.put(hometeamName, totmarginOfLoss.get(hometeamName) + hometeammarginofLoss);
+                	totmarginOfLoss.put(awayteamName, totmarginOfLoss.get(awayteamName) + awayteammarginofLoss);              		
                 	}
                 else {
-                	totmerginOfLoss.put(hometeamName, hometeammerginofLoss);
-                	totmerginOfLoss.put(awayteamName, awayteammerginofLoss);
+                	totmarginOfLoss.put(hometeamName, hometeammarginofLoss);
+                	totmarginOfLoss.put(awayteamName, awayteammarginofLoss);
                 }
                             
                 /*
                  * Calculate Maximum Margin Of Victory for each team
                  */
-                if (maxmerginOfVictory.size() == 0) {
-                	maxmerginOfVictory.put(hometeamName, hometeammerginofVictory);
-                	maxmerginOfVictory.put(awayteamName, awayteammerginofVictory);
+                if (maxmarginOfVictory.size() == 0) {
+                	maxmarginOfVictory.put(hometeamName, hometeammarginofVictory);
+                	maxmarginOfVictory.put(awayteamName, awayteammarginofVictory);
                 }
-                else if (maxmerginOfVictory.containsKey(hometeamName) && maxmerginOfVictory.containsKey(awayteamName)) {
-                	maxmerginOfVictory.put(hometeamName, Math.max(maxmerginOfVictory.get(hometeamName), hometeammerginofVictory));
-                	maxmerginOfVictory.put(awayteamName, Math.max(maxmerginOfVictory.get(awayteamName), awayteammerginofVictory));              		
+                else if (maxmarginOfVictory.containsKey(hometeamName) && maxmarginOfVictory.containsKey(awayteamName)) {
+                	maxmarginOfVictory.put(hometeamName, Math.max(maxmarginOfVictory.get(hometeamName), hometeammarginofVictory));
+                	maxmarginOfVictory.put(awayteamName, Math.max(maxmarginOfVictory.get(awayteamName), awayteammarginofVictory));              		
                 	}
                 else {
-                	maxmerginOfVictory.put(hometeamName, hometeammerginofVictory);
-                	maxmerginOfVictory.put(awayteamName, awayteammerginofVictory);
+                	maxmarginOfVictory.put(hometeamName, hometeammarginofVictory);
+                	maxmarginOfVictory.put(awayteamName, awayteammarginofVictory);
                 }
                 
                 /*
                  * Calculate Maximum Margin Of Loss for each team
                  */
-                if (maxmerginOfLoss.size() == 0) {
-                	maxmerginOfLoss.put(hometeamName, hometeammerginofLoss);
-                	maxmerginOfLoss.put(awayteamName, awayteammerginofLoss);
+                if (maxmarginOfLoss.size() == 0) {
+                	maxmarginOfLoss.put(hometeamName, hometeammarginofLoss);
+                	maxmarginOfLoss.put(awayteamName, awayteammarginofLoss);
                 }
-                else if (maxmerginOfLoss.containsKey(hometeamName) && maxmerginOfLoss.containsKey(awayteamName)) {
-                	maxmerginOfLoss.put(hometeamName, Math.max(maxmerginOfLoss.get(hometeamName), hometeammerginofLoss));
-                	maxmerginOfLoss.put(awayteamName, Math.max(maxmerginOfLoss.get(awayteamName), hometeammerginofLoss));              		
+                else if (maxmarginOfLoss.containsKey(hometeamName) && maxmarginOfLoss.containsKey(awayteamName)) {
+                	maxmarginOfLoss.put(hometeamName, Math.max(maxmarginOfLoss.get(hometeamName), hometeammarginofLoss));
+                	maxmarginOfLoss.put(awayteamName, Math.max(maxmarginOfLoss.get(awayteamName), hometeammarginofLoss));              		
                 	}
                 else {
-                	maxmerginOfLoss.put(hometeamName, hometeammerginofLoss);
-                	maxmerginOfLoss.put(awayteamName, hometeammerginofLoss);
+                	maxmarginOfLoss.put(hometeamName, hometeammarginofLoss);
+                	maxmarginOfLoss.put(awayteamName, hometeammarginofLoss);
                 }
                 
             }            
