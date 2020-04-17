@@ -10,8 +10,8 @@ public class Driver {
     	FileHandler filehandler = new FileHandler();
     	List<RankingClass> inputData= new ArrayList<>();
     	
+    	
     	inputData = filehandler.readTextFile();
-
     	for (RankingClass data : inputData) {
     		if (data.getFtr().equals("H"))	{
     			graph.add(data.getAwayTeam(), data.getHomeTeam());
