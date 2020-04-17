@@ -10,7 +10,6 @@ import java.util.Stack;
  * An example class for directed graphs.  The vertex type can be specified.
  * There are no edge costs/weights.
  * 
- * @author Dey Somanwita
  */
 
 public class Digraph<V extends team> {
