@@ -5,7 +5,7 @@ EPL Ranking System
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+In the project, data of the matches conducted this season have been used. There are a total of 20 teams. Ideally, each team plays 19 matches on home ground and 19 matches away. But due to COVID-19 not all the matches took place so for those matches we tacked this by predicting the outcomes of future football matches by using the past match outcome data.
 
 ### Prerequisites
 
