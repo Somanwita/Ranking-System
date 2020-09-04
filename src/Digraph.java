@@ -18,8 +18,7 @@ public class Digraph<V extends team> {
     private int E = 0;
     
 	/**
-     * neighbors is the adjacency list, but instead
-     * of an Bag, a Map is used to map each vertex to its list of 
+     * neighbors is the adjacency list. Used Map to map each vertex to its list of 
      * adjacent vertices.
      */   
     Map<V,List<V>> neighbors = new HashMap<V,List<V>>();
