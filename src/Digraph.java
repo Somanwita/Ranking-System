@@ -7,8 +7,7 @@ import java.util.Queue;
 import java.util.Stack;
 
 /**
- * An example class for directed graphs.  The vertex type can be specified.
- * There are no edge costs/weights.
+ * Directed graphs with Generic vertex type and no edge weight.
  * 
  */
 
@@ -17,8 +16,8 @@ public class Digraph<V extends team> {
     private int V = 0;          
     private int E = 0;
     
-	/**
-     * neighbors is the adjacency list. Used Map to map each vertex to its list of 
+    /**
+     * Define adjacency list named neighbors. Used Map to map each vertex to its list of 
      * adjacent vertices.
      */   
     Map<V,List<V>> neighbors = new HashMap<V,List<V>>();
